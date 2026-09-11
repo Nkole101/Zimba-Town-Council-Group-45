@@ -4,6 +4,8 @@ Scope: only the CDF projects and source-post CSVs. This implements Part 1 of the
 
 ## Run and reproduce
 
+Open the executed [CDF cleaning notebook](../../cdf_cleaning.ipynb) to see the literal pandas steps and their outputs in order. Each judgment has a preceding markdown cell. The notebook independently implements the pipeline and checks DataFrame equality with `scripts/clean_cdf.py` before export. Regenerate and execute its cells with `python scripts/create_cdf_cleaning_notebook.py` from the repository root.
+
 ```powershell
 python -m pip install -r requirements.txt
 python scripts/clean_cdf.py
