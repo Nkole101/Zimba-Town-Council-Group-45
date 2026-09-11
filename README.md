@@ -2,6 +2,8 @@
 
 ## CDF projects dataset
 
+Part 1 cleaning is complete for the CDF files: 44 project announcements and 29 source posts. See [cleaning decisions and handoff](docs/cdf_cleaning/README.md). Run `python scripts/clean_cdf.py` to reproduce the cleaned snapshot, including explicit unspecified statuses and additional text-analysis columns.
+
 The CDF scraper covers CDF project announcements only. Install the shared requirements using the setup below, then run:
 
 ```powershell
