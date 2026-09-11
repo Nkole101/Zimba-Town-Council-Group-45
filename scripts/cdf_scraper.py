@@ -502,9 +502,10 @@ def discover_from_rest_api(
 ) -> list[str]:
     """Use WordPress's public JSON index to locate CDF posts efficiently."""
     results: list[str] = []
-    api_url = urljoin(base_url, "/wp-json/wp/v2/posts")
+    # This site's plain-permalink configuration exposes REST through rest_route.
+    api_url = urljoin(base_url, "/?rest_route=/wp/v2/posts")
     for page in range(1, max_pages + 1):
-        url = f"{api_url}?per_page=100&page={page}&_fields=id,date,link,title,content"
+        url = f"{api_url}&per_page=100&page={page}&_fields=id,date,link,title,content"
         try:
             response = fetch(session, url, base_url, robots, delay)
             items = response.json()
