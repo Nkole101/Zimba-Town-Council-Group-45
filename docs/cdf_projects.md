@@ -1,5 +1,7 @@
 # CDF projects
 
+The reviewed handoff CSV is available with 44 announcement records from 19 source posts. See [handoff notes](cdf_handoff.md) for missing values, repeated-project interpretation and review decisions. Reproduce this fixed snapshot with `python scripts/build_cdf_reviewed.py`; a new scraper run produces candidates and must be reviewed separately.
+
 Contribution for CSC 4792 Group 45, scoped to section 3 of the supplied task allocation. Uses requests, regular expressions and pandas. The administration and district profile datasets belong to the other team members.
 
 From the repository root, with Python 3.10 or newer, use the shared requirements:
