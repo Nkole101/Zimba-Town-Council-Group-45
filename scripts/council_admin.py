@@ -1,4 +1,4 @@
-"""Collect Zimba Town Council administration/contact records for Bwalya."""
+"""Collect Zimba Town Council administration/contact records ."""
 
 from __future__ import annotations
 
