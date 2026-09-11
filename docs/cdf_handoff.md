@@ -1,0 +1,5 @@
+# Handoff status — 11 September 2026
+
+This contribution covers the CDF project announcements dataset assigned in the supplied role document. The provided scraper has been packaged with setup instructions and five passing offline regression tests, including ambiguous amounts and status attribution across projects. HTTPS access succeeded with the explicitly requested `--no-verify-ssl` fallback: robots.txt returned 404 and the homepage returned 200; the homepage is saved in `raw/cdf_projects/home.html`. The final CSV, complete archive collection and manual source review remain pending; no verified project row count can yet be reported.
+
+The contribution has been compared with main at `1dbce5a` and aligned with the repository's root-level `scripts/`, `data/`, shared `requirements.txt`, and `raw/` structure. CDF raw evidence uses `raw/cdf_projects/` to avoid collisions with the administration scraper. Bwalya's script and data are unchanged. No teammate message has been sent; publication status is reported separately.
