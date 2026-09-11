@@ -40,3 +40,13 @@ The output is pipe-delimited (`|`). Open the generated CSV in a text editor to c
 ```powershell
 .\.venv\Scripts\python.exe scripts\council_admin.py --manual-records data\manual_admin_records.csv
 ```
+
+### Clean the council administration data
+
+Run the Part 1 Detect -> Judge -> Act cleaning workflow after collection:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\clean_council_admin.py
+```
+
+The command keeps source-backed rows, removes duplicate `source_url` values, preserves legitimate blanks, normalizes contact fields, and writes the cleaned pipe-delimited CSV back to `data/`. The decisions and final missing-value counts are recorded in [docs/council_admin_cleaning_report.md](docs/council_admin_cleaning_report.md).
