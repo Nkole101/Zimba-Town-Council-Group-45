@@ -2,6 +2,8 @@
 
 ## CDF projects dataset
 
+Part 1 cleaning is complete for the CDF files: 44 project announcements and 29 source posts. See [cleaning decisions and handoff](docs/cdf_cleaning/README.md). Run `python scripts/clean_cdf.py` to reproduce the cleaned snapshot, including explicit unspecified statuses and additional text-analysis columns.
+
 The CDF scraper covers CDF project announcements only. Install the shared requirements using the setup below, then run:
 
 ```powershell
@@ -9,7 +11,7 @@ The CDF scraper covers CDF project announcements only. Install the shared requir
 python -m unittest discover -s tests -p test_cdf_parser.py -v
 ```
 
-It saves source evidence in `raw/cdf_projects/`, a cleaned source-post table in `data/cdf_source_posts.csv`, and candidate records in `data/db-unza26-csc4792-zimba_town_council_cdf_projects.csv`. Source verification and a successful collection run are still required before the CSV is ready for handoff. See [CDF collection and review instructions](docs/cdf_projects.md) and [handoff status](docs/cdf_handoff.md).
+The reviewed CSV at `data/db-unza26-csc4792-zimba_town_council_cdf_projects.csv` contains 44 project/announcement records from 19 source posts. Source evidence is in `raw/cdf_projects/` and the cleaned source-post table is in `data/cdf_source_posts.csv`. Reproduce the reviewed snapshot with `python scripts/build_cdf_reviewed.py`; running the scraper alone produces unreviewed candidates. See [CDF collection and review instructions](docs/cdf_projects.md) and [handoff status](docs/cdf_handoff.md).
 
 
 ## Council administration dataset
@@ -38,3 +40,13 @@ The output is pipe-delimited (`|`). Open the generated CSV in a text editor to c
 ```powershell
 .\.venv\Scripts\python.exe scripts\council_admin.py --manual-records data\manual_admin_records.csv
 ```
+
+### Clean the council administration data
+
+Run the Part 1 Detect -> Judge -> Act cleaning workflow after collection:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\clean_council_admin.py
+```
+
+The command keeps source-backed rows, removes duplicate `source_url` values, preserves legitimate blanks, normalizes contact fields, and writes the cleaned pipe-delimited CSV back to `data/`. The decisions and final missing-value counts are recorded in [docs/council_admin_cleaning_report.md](docs/council_admin_cleaning_report.md).
