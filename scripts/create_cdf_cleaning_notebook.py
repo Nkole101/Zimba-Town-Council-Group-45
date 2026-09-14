@@ -20,14 +20,16 @@ def code(text):
 markdown("""# CDF datasets: Part 1 pandas cleaning
 This notebook implements sections 1.1-1.8 of the supplied cleaning instructions for CDF projects and source posts only. The manually reviewed extraction snapshot is the input, not a substitute for cleaning. Every cleaning operation below uses pandas; original snapshots and narrative evidence are preserved.
 
-Run from the repository root. No network access is needed. The final cells export the existing submission filenames. This notebook covers only the CDF contribution, not the group's complete Part 2 notebook.
+Run from the repository root or from notebooks/ (its own folder). No network access is needed. The final cells export the existing submission filenames. This notebook covers only the CDF contribution, not the group's complete Part 2 notebook.
 """)
 code('''from pathlib import Path
 import re
 import pandas as pd
 
 ROOT = Path.cwd()
-assert (ROOT / "scripts/clean_cdf.py").exists(), "Run this notebook from the repository root"
+if not (ROOT / "scripts/clean_cdf.py").exists() and (ROOT.parent / "scripts/clean_cdf.py").exists():
+    ROOT = ROOT.parent  # notebook was launched from notebooks/, repo root is one level up
+assert (ROOT / "scripts/clean_cdf.py").exists(), "Run this notebook from the repository root or notebooks/"
 PROJECT_FILE = "db-unza26-csc4792-zimba_town_council_cdf_projects.csv"
 SOURCE_FILE = "cdf_source_posts.csv"
 snapshot = ROOT / "raw/cdf_projects/before_cleaning"
@@ -176,8 +178,10 @@ def main():
         cell["outputs"] = [{"output_type": "stream", "name": "stdout", "text": stream.getvalue().splitlines(True)}]
     notebook = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
                 "language_info": {"name": "python", "version": "3.14"}}, "nbformat": 4, "nbformat_minor": 4}
-    (ROOT / "cdf_cleaning.ipynb").write_text(json.dumps(notebook, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Executed {counter} code cells and saved cdf_cleaning.ipynb")
+    output_path = ROOT / "notebooks" / "cdf_cleaning.ipynb"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(notebook, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Executed {counter} code cells and saved {output_path}")
 
 
 if __name__ == "__main__":
